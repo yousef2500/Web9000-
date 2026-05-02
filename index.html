@@ -14,12 +14,10 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%;background:var(--deep);color:var(--text);font-family:'Cormorant Garamond',serif;overflow-x:hidden}
 
-    /* STARS */
     #stars{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
     .star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d) ease-in-out infinite}
     @keyframes twinkle{0%,100%{opacity:.1;transform:scale(1)}50%{opacity:.9;transform:scale(1.4)}}
 
-    /* LOCK */
     #lockScreen{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;
       align-items:center;justify-content:center;gap:1.4rem;
       background:radial-gradient(ellipse at 50% 40%,#2a1040 0%,#0d0a14 70%);
@@ -34,14 +32,11 @@
     #lockScreen button:hover{transform:scale(1.06)}
     #errorMsg{font-size:.95rem;color:#e07a8a;min-height:1.2em}
 
-    /* APP */
     #app{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:0 1rem 7rem;opacity:0;transition:opacity 1s}
     #app.visible{opacity:1}
 
-    /* BANNER */
     #banner{width:100%;text-align:center;padding:1rem 1.5rem;font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(1rem,3.5vw,1.4rem);color:var(--blush);opacity:0;transition:opacity .6s;background:linear-gradient(90deg,transparent,rgba(201,116,138,.08),transparent)}
 
-    /* LOADING */
     #loadingOverlay{position:fixed;inset:0;z-index:150;background:rgba(13,10,20,.88);backdrop-filter:blur(6px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
     #loadingOverlay.show{opacity:1;visibility:visible}
     .spinner{width:46px;height:46px;border:3px solid rgba(201,116,138,.2);border-top-color:var(--rose);border-radius:50%;animation:spin .8s linear infinite}
@@ -49,7 +44,6 @@
     #loadingOverlay p{font-family:'Playfair Display',serif;font-style:italic;color:var(--blush);font-size:1rem}
     #loadingProgress{font-size:.82rem;color:rgba(242,197,208,.5);margin-top:.3rem}
 
-    /* ALBUMS */
     .albums{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;width:min(560px,96vw);margin:.5rem auto 0}
     .album-card{position:relative;background:var(--glass);border:1px solid rgba(201,116,138,.2);border-radius:20px;padding:1.4rem 1rem 1.2rem;cursor:pointer;text-align:center;overflow:hidden;backdrop-filter:blur(12px);transition:transform .3s,border-color .3s,box-shadow .3s}
     .album-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(201,116,138,.14),transparent 70%);opacity:0;transition:opacity .3s}
@@ -67,14 +61,12 @@
     .card-thumbs{display:flex;gap:3px;justify-content:center;margin-top:.55rem;height:34px;overflow:hidden;border-radius:8px}
     .card-thumb{width:34px;height:34px;object-fit:cover;border-radius:5px;flex-shrink:0}
 
-    /* MUSIC BAR */
     .music-bar{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:1rem;background:rgba(13,10,20,.82);border:1px solid rgba(201,116,138,.25);border-radius:50px;padding:.6rem 1.6rem;backdrop-filter:blur(18px);box-shadow:0 4px 30px rgba(0,0,0,.5)}
     .mbtn{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--blush);padding:.3rem .4rem;border-radius:50%;transition:color .2s,transform .2s,background .2s}
     .mbtn:hover{color:#fff;background:rgba(201,116,138,.18);transform:scale(1.15)}
     .mbtn.active{color:var(--rose)}
     .song-title{font-size:.88rem;color:rgba(242,197,208,.65);letter-spacing:.04em;min-width:90px;text-align:center;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-    /* MODAL */
     #modal{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;background:rgba(5,3,10,.93);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;backdrop-filter:blur(8px)}
     #modal.open{opacity:1;visibility:visible}
     .modal-header{display:flex;align-items:center;gap:.8rem;padding:1.2rem 1.4rem .9rem;border-bottom:1px solid rgba(201,116,138,.15)}
@@ -86,7 +78,6 @@
     .modal-body::-webkit-scrollbar{width:4px}
     .modal-body::-webkit-scrollbar-thumb{background:var(--rose);border-radius:4px}
 
-    /* PHOTO GRID */
     .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.7rem}
     .photo-item{aspect-ratio:1;border-radius:14px;overflow:hidden;cursor:pointer;border:1px solid rgba(201,116,138,.18);transition:transform .25s,border-color .25s,box-shadow .25s;position:relative;background:rgba(201,116,138,.06)}
     .photo-item:hover{transform:scale(1.04);border-color:var(--rose);box-shadow:0 6px 22px rgba(201,116,138,.3)}
@@ -95,11 +86,10 @@
     .empty-state{grid-column:1/-1;text-align:center;padding:3rem 1rem;color:rgba(242,197,208,.4)}
     .empty-state .em{font-size:3rem;margin-bottom:1rem}
 
-    /* LIGHTBOX */
     #lightbox{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.93);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
     #lightbox.open{opacity:1;visibility:visible}
     #lbImg{max-width:92vw;max-height:88vh;border-radius:14px;box-shadow:0 0 60px rgba(201,116,138,.35);display:none}
-    #lbVid{max-width:92vw;max-height:88vh;border-radius:14px;display:none}
+    #lbVid{max-width:92vw;max-height:88vh;border-radius:14px;display:none;background:#000}
     #lbClose{position:absolute;top:1rem;right:1.2rem;font-size:1.8rem;color:var(--blush);background:none;border:none;cursor:pointer;z-index:1}
     .lb-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(201,116,138,.2);border:none;color:var(--blush);font-size:2rem;padding:.4rem .85rem;border-radius:50%;cursor:pointer;transition:background .2s;z-index:1}
     .lb-arrow:hover{background:rgba(201,116,138,.45)}
@@ -117,7 +107,6 @@
   <p id="loadingProgress"></p>
 </div>
 
-<!-- LOCK -->
 <div id="lockScreen">
   <div class="lock-icon">💗</div>
   <h2>Enter Password ❤️</h2>
@@ -127,7 +116,6 @@
   <p id="errorMsg"></p>
 </div>
 
-<!-- APP -->
 <div id="app">
   <div id="banner"></div>
 
@@ -166,7 +154,6 @@
   </div>
 </div>
 
-<!-- MODAL -->
 <div id="modal">
   <div class="modal-header">
     <span class="modal-title" id="modalTitle"></span>
@@ -178,7 +165,6 @@
   </div>
 </div>
 
-<!-- LIGHTBOX -->
 <div id="lightbox">
   <button id="lbClose" onclick="closeLightbox()">✕</button>
   <button class="lb-arrow" id="lbPrev" onclick="lbNav(-1)">‹</button>
@@ -190,13 +176,12 @@
 
 <script>
 /* ══════════════════════════════════════════
-   ⚙️  CONFIG — غيّر هنا بس
+   ⚙️  CONFIG
 ══════════════════════════════════════════ */
-const GITHUB_TOKEN = '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';
-const GITHUB_REPO  = 'yousef2500/Web9000-';
+const GITHUB_TOKEN  = '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';
+const GITHUB_REPO   = 'yousef2500/Web9000-';
 const GITHUB_BRANCH = 'main';
 
-/* اسم كل ألبوم = اسم المجلد بالظبط على GitHub */
 const ALBUM_FOLDERS = {
   'first_date' : 'assets/images/first_date',
   'second_date': 'assets/images/second_date',
@@ -211,7 +196,6 @@ const ALBUM_LABELS = {
   'Memories'   : 'Memories 💫',
 };
 
-/* مجلد الموسيقى على GitHub */
 const MUSIC_FOLDER = 'assets/music';
 
 const MSGS = [
@@ -232,103 +216,88 @@ const albums = {};
 Object.keys(ALBUM_FOLDERS).forEach(k => albums[k] = []);
 
 let openKey='', lbIdx=0, curSong=0, audio=null, isMuted=false;
-let songBlobUrls = [];
+let songs = []; // { url, title } — direct GitHub URLs, no blob pre-fetch
 
 /* ══════════════════════════════════════════
-   GITHUB API
+   GITHUB API HELPERS
 ══════════════════════════════════════════ */
 const GH_HEADERS = {
   'Authorization': `token ${GITHUB_TOKEN}`,
-  
   'Accept': 'application/vnd.github.v3+json'
 };
 
-/* جيب قائمة الملفات من مجلد على GitHub */
 async function ghListFolder(path) {
   const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${path}?ref=${GITHUB_BRANCH}`;
-  const res = await fetch(url, { headers: GH_HEADERS });
-  if (!res.ok) return [];
-  const data = await res.json();
-  return Array.isArray(data) ? data : [];
-}
-
-/* جيب ملف كـ blob URL */
-async function ghFetchBlob(downloadUrl) {
-  const res = await fetch(downloadUrl, { headers: GH_HEADERS });
-  if (!res.ok) return null;
-  const blob = await res.blob();
-  return URL.createObjectURL(blob);
-}
-
-/* ══════════════════════════════════════════
-   LOAD MUSIC من GitHub
-══════════════════════════════════════════ */
-async function loadMusic() {
-  const files = await ghListFolder(MUSIC_FOLDER);
-  const mp3s = files
-    .filter(f => f.type === 'file' && f.name.match(/\.(mp3|MP3|ogg|OGG|m4a|M4A)$/))
-    .sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true}));
-
-  document.getElementById('loadingProgress').textContent = `Loading music (0/${mp3s.length})…`;
-
-  for (let i = 0; i < mp3s.length; i++) {
-    document.getElementById('loadingProgress').textContent = `Loading music (${i+1}/${mp3s.length})…`;
-    const blobUrl = await ghFetchBlob(mp3s[i].download_url);
-    if (blobUrl) songBlobUrls.push({ url: blobUrl, title: '♪ ' + mp3s[i].name.replace(/\.[^.]+$/, '') });
+  try {
+    const res = await fetch(url, { headers: GH_HEADERS });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch(e) {
+    console.warn('ghListFolder failed:', path, e);
+    return [];
   }
 }
 
 /* ══════════════════════════════════════════
-   LOAD ALBUMS من GitHub
+   LOAD MUSIC — قائمة URLs مباشرة، بدون blob
+══════════════════════════════════════════ */
+async function loadMusic() {
+  const files = await ghListFolder(MUSIC_FOLDER);
+  songs = files
+    .filter(f => f.type === 'file' && /\.(mp3|ogg|m4a|aac|wav|flac)$/i.test(f.name))
+    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
+    .map(f => ({
+      url  : f.download_url,   // ← URL مباشر، مش blob
+      title: '♪ ' + f.name.replace(/\.[^.]+$/, '')
+    }));
+}
+
+/* ══════════════════════════════════════════
+   LOAD ALBUMS — URLs مباشرة، بدون blob
 ══════════════════════════════════════════ */
 async function loadAllAlbums() {
   document.getElementById('loadingOverlay').classList.add('show');
 
-  /* أولاً حمّل الموسيقى */
   await loadMusic();
 
-  /* بعدين حمّل الألبومات */
   const keys = Object.keys(ALBUM_FOLDERS);
   for (const key of keys) {
     document.getElementById('loadingProgress').textContent = `Loading ${ALBUM_LABELS[key]}…`;
+
     const files = await ghListFolder(ALBUM_FOLDERS[key]);
 
-    /* فلتر صور وفيديوهات بس، رتّبهم بالاسم */
     const media = files
-      .filter(f => f.type === 'file' && f.name.match(/\.(jpg|jpeg|png|webp|JPG|JPEG|PNG|WEBP|mp4|MP4|mov|MOV|webm|WEBM)$/i))
-      .sort((a,b) => a.name.localeCompare(b.name, undefined, {numeric:true}));
+      .filter(f => f.type === 'file' && /\.(jpe?g|png|webp|gif|mp4|mov|webm|mkv)$/i.test(f.name))
+      .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
 
-    for (let i = 0; i < media.length; i++) {
-      const f = media[i];
-      const isVideo = f.name.match(/\.(mp4|MP4|mov|MOV|webm|WEBM)$/i);
-      const blobUrl = await ghFetchBlob(f.download_url);
-      if (blobUrl) {
-        albums[key].push({
-          type: isVideo ? 'video' : 'image',
-          src: blobUrl,
-          name: f.name
-        });
-      }
-    }
+    /* ✅ استخدام download_url مباشرةً بدون أي blob fetch */
+    media.forEach(f => {
+      const isVideo = /\.(mp4|mov|webm|mkv)$/i.test(f.name);
+      albums[key].push({
+        type: isVideo ? 'video' : 'image',
+        src : f.download_url,   // ← مش blob
+        name: f.name
+      });
+    });
 
     updateCard(key);
   }
 
   document.getElementById('loadingOverlay').classList.remove('show');
 
-  /* شغّل الموسيقى بعد التحميل */
-  if (songBlobUrls.length) initMusic();
+  if (songs.length) initMusic();
 }
 
 /* ══════════════════════════════════════════
    STARS
 ══════════════════════════════════════════ */
 (()=>{
-  const c=document.getElementById('stars');
-  for(let i=0;i<130;i++){
-    const s=document.createElement('div'); s.className='star';
-    const z=Math.random()*2.5+.5;
-    s.style.cssText=`width:${z}px;height:${z}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*3+2).toFixed(1)}s;animation-delay:-${(Math.random()*5).toFixed(1)}s;opacity:${Math.random()*.6+.1}`;
+  const c = document.getElementById('stars');
+  for (let i = 0; i < 130; i++) {
+    const s = document.createElement('div'); s.className = 'star';
+    const z = Math.random() * 2.5 + .5;
+    s.style.cssText = `width:${z}px;height:${z}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*3+2).toFixed(1)}s;animation-delay:-${(Math.random()*5).toFixed(1)}s;opacity:${Math.random()*.6+.1}`;
     c.appendChild(s);
   }
 })();
@@ -336,86 +305,96 @@ async function loadAllAlbums() {
 /* ══════════════════════════════════════════
    LOCK
 ══════════════════════════════════════════ */
-function checkPassword(){
+function checkPassword() {
   const v = document.getElementById('password').value;
-  if(v === 'DODO'){
+  if (v === 'DODO') {
     document.getElementById('lockScreen').classList.add('gone');
-    requestAnimationFrame(()=>document.getElementById('app').classList.add('visible'));
+    requestAnimationFrame(() => document.getElementById('app').classList.add('visible'));
     startBanner();
     loadAllAlbums();
   } else {
     document.getElementById('errorMsg').textContent = 'Wrong password 💔';
-    setTimeout(()=>document.getElementById('errorMsg').textContent='', 2000);
+    setTimeout(() => document.getElementById('errorMsg').textContent = '', 2000);
   }
 }
 
 /* ══════════════════════════════════════════
    BANNER
 ══════════════════════════════════════════ */
-function startBanner(){
-  const el=document.getElementById('banner'); let i=0;
-  function show(){
-    el.style.opacity=0;
-    setTimeout(()=>{ el.textContent=MSGS[i]; el.style.opacity=1; i=(i+1)%MSGS.length; },600);
+function startBanner() {
+  const el = document.getElementById('banner'); let i = 0;
+  function show() {
+    el.style.opacity = 0;
+    setTimeout(() => { el.textContent = MSGS[i]; el.style.opacity = 1; i = (i+1) % MSGS.length; }, 600);
   }
   show(); setInterval(show, 4500);
 }
 
 /* ══════════════════════════════════════════
-   MUSIC
+   MUSIC — بيشغّل مباشرة من URL
 ══════════════════════════════════════════ */
-function initMusic(){
-  if(!songBlobUrls.length) return;
-  audio = new Audio(songBlobUrls[curSong].url);
+function initMusic() {
+  if (!songs.length) return;
+  audio = new Audio();
   audio.volume = .65;
   audio.addEventListener('ended', nextSong);
-  audio.play().catch(()=>{});
-  document.getElementById('songTitle').textContent = songBlobUrls[curSong].title;
+  playSong(curSong);
 }
-function nextSong(){ curSong=(curSong+1)%songBlobUrls.length; reloadSong(); }
-function prevSong(){ curSong=(curSong-1+songBlobUrls.length)%songBlobUrls.length; reloadSong(); }
-function reloadSong(){
-  if(!audio||!songBlobUrls.length) return;
-  audio.src=songBlobUrls[curSong].url; audio.play().catch(()=>{});
-  document.getElementById('songTitle').textContent=songBlobUrls[curSong].title;
+
+function playSong(idx) {
+  if (!audio || !songs.length) return;
+  curSong = (idx + songs.length) % songs.length;
+  audio.src = songs[curSong].url;
+  audio.load();
+  audio.play().catch(() => {});
+  document.getElementById('songTitle').textContent = songs[curSong].title;
 }
-function toggleMute(){
-  isMuted=!isMuted; if(audio) audio.muted=isMuted;
-  const b=document.getElementById('muteBtn');
-  b.textContent=isMuted?'🔇':'🔊'; b.classList.toggle('active',isMuted);
+
+function nextSong() { playSong(curSong + 1); }
+function prevSong() { playSong(curSong - 1); }
+
+function toggleMute() {
+  isMuted = !isMuted;
+  if (audio) audio.muted = isMuted;
+  const b = document.getElementById('muteBtn');
+  b.textContent = isMuted ? '🔇' : '🔊';
+  b.classList.toggle('active', isMuted);
 }
 
 /* ══════════════════════════════════════════
    UPDATE CARD
 ══════════════════════════════════════════ */
-function updateCard(key){
-  const items = albums[key];
-  const countEl  = document.getElementById('count-'  + key);
-  const thumbsEl = document.getElementById('thumbs-' + key);
-  const card     = document.getElementById('card-'   + key);
+function updateCard(key) {
+  const items   = albums[key];
+  const countEl = document.getElementById('count-'  + key);
+  const thumbEl = document.getElementById('thumbs-' + key);
+  const card    = document.getElementById('card-'   + key);
 
-  const photos = items.filter(i=>i.type==='image').length;
-  const vids   = items.filter(i=>i.type==='video').length;
-  if(items.length){
+  const photos = items.filter(i => i.type === 'image').length;
+  const vids   = items.filter(i => i.type === 'video').length;
+
+  if (items.length) {
     let txt = '';
-    if(photos) txt += photos + ' photo' + (photos>1?'s':'');
-    if(vids)   txt += (txt?' · ':'')+vids+' video'+(vids>1?'s':'');
+    if (photos) txt += photos + ' photo' + (photos > 1 ? 's' : '');
+    if (vids)   txt += (txt ? ' · ' : '') + vids + ' video' + (vids > 1 ? 's' : '');
     countEl.textContent = txt;
     card.classList.add('loaded');
   } else {
     countEl.textContent = 'empty';
   }
 
-  thumbsEl.innerHTML = '';
-  items.slice(0,3).forEach(item=>{
-    if(item.type==='image'){
-      const img=document.createElement('img');
-      img.src=item.src; img.className='card-thumb';
-      thumbsEl.appendChild(img);
+  thumbEl.innerHTML = '';
+  items.slice(0, 3).forEach(item => {
+    if (item.type === 'image') {
+      const img = document.createElement('img');
+      img.src = item.src; img.className = 'card-thumb';
+      thumbEl.appendChild(img);
     } else {
-      const vid=document.createElement('video');
-      vid.src=item.src; vid.className='card-thumb'; vid.muted=true;
-      thumbsEl.appendChild(vid);
+      /* thumbnail للفيديو: أول فريم */
+      const vid = document.createElement('video');
+      vid.src = item.src; vid.className = 'card-thumb';
+      vid.muted = true; vid.preload = 'metadata';
+      thumbEl.appendChild(vid);
     }
   });
 }
@@ -423,7 +402,7 @@ function updateCard(key){
 /* ══════════════════════════════════════════
    OPEN ALBUM
 ══════════════════════════════════════════ */
-function openAlbum(key){
+function openAlbum(key) {
   openKey = key;
   const items = albums[key];
   document.getElementById('modalTitle').textContent = ALBUM_LABELS[key];
@@ -431,79 +410,103 @@ function openAlbum(key){
   const grid = document.getElementById('photoGrid');
   grid.innerHTML = '';
 
-  if(!items.length){
+  if (!items.length) {
     grid.innerHTML = `<div class="empty-state"><div class="em">📂</div><p>No files found yet</p></div>`;
   } else {
-    items.forEach((item, idx)=>{
+    items.forEach((item, idx) => {
       const div = document.createElement('div');
       div.className = 'photo-item';
-      if(item.type==='image'){
-        const img=document.createElement('img');
-        img.src=item.src; img.alt=item.name; img.loading='lazy';
+
+      if (item.type === 'image') {
+        const img = document.createElement('img');
+        img.src = item.src; img.alt = item.name; img.loading = 'lazy';
         div.appendChild(img);
       } else {
-        const vid=document.createElement('video');
-        vid.src=item.src; vid.muted=true; vid.loop=true; vid.playsInline=true;
-        vid.addEventListener('mouseenter',()=>vid.play());
-        vid.addEventListener('mouseleave',()=>{vid.pause();vid.currentTime=0;});
+        /* ✅ فيديو: بيتحمّل عند الطلب فقط */
+        const vid = document.createElement('video');
+        vid.src = item.src;
+        vid.muted = true; vid.loop = true; vid.playsInline = true;
+        vid.preload = 'metadata';           // بس metadata، مش full load
+        vid.addEventListener('mouseenter', () => vid.play());
+        vid.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
         div.appendChild(vid);
-        const pi=document.createElement('div');
-        pi.className='play-icon'; pi.textContent='▶';
+        const pi = document.createElement('div');
+        pi.className = 'play-icon'; pi.textContent = '▶';
         div.appendChild(pi);
       }
-      div.onclick=()=>openLightbox(idx);
+
+      div.onclick = () => openLightbox(idx);
       grid.appendChild(div);
     });
   }
+
   document.getElementById('modal').classList.add('open');
-  document.body.style.overflow='hidden';
+  document.body.style.overflow = 'hidden';
 }
 
-function closeModal(){
+function closeModal() {
   document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow='';
+  document.body.style.overflow = '';
 }
 
 /* ══════════════════════════════════════════
    LIGHTBOX
 ══════════════════════════════════════════ */
-function openLightbox(idx){ lbIdx=idx; showLb(); document.getElementById('lightbox').classList.add('open'); }
-
-function showLb(){
-  const items=albums[openKey]; const item=items[lbIdx];
-  const img=document.getElementById('lbImg'); const vid=document.getElementById('lbVid');
-  document.getElementById('lbCap').textContent=`${lbIdx+1} / ${items.length}`;
-  if(item.type==='image'){
-    img.src=item.src; img.style.display='block';
-    vid.pause(); vid.style.display='none';
-  } else {
-    vid.src=item.src; vid.style.display='block'; vid.play();
-    img.style.display='none';
-  }
-  document.getElementById('lbPrev').style.opacity=lbIdx===0?.25:1;
-  document.getElementById('lbNext').style.opacity=lbIdx===items.length-1?.25:1;
+function openLightbox(idx) {
+  lbIdx = idx;
+  showLb();
+  document.getElementById('lightbox').classList.add('open');
 }
 
-function lbNav(d){ lbIdx=Math.max(0,Math.min(albums[openKey].length-1,lbIdx+d)); showLb(); }
+function showLb() {
+  const items = albums[openKey];
+  const item  = items[lbIdx];
+  const img   = document.getElementById('lbImg');
+  const vid   = document.getElementById('lbVid');
 
-function closeLightbox(){
+  document.getElementById('lbCap').textContent = `${lbIdx + 1} / ${items.length}`;
+
+  if (item.type === 'image') {
+    img.src = item.src; img.style.display = 'block';
+    vid.pause(); vid.src = ''; vid.style.display = 'none';
+  } else {
+    vid.src = item.src; vid.style.display = 'block';
+    vid.load(); vid.play().catch(() => {});
+    img.src = ''; img.style.display = 'none';
+  }
+
+  document.getElementById('lbPrev').style.opacity = lbIdx === 0 ? .25 : 1;
+  document.getElementById('lbNext').style.opacity = lbIdx === items.length - 1 ? .25 : 1;
+}
+
+function lbNav(d) {
+  lbIdx = Math.max(0, Math.min(albums[openKey].length - 1, lbIdx + d));
+  showLb();
+}
+
+function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
-  document.getElementById('lbVid').pause();
+  const vid = document.getElementById('lbVid');
+  vid.pause(); vid.src = '';
 }
 
 /* ══════════════════════════════════════════
    KEYBOARD & SWIPE
 ══════════════════════════════════════════ */
-document.addEventListener('keydown',e=>{
-  if(e.key==='Escape'){closeLightbox();closeModal();}
-  if(document.getElementById('lightbox').classList.contains('open')){
-    if(e.key==='ArrowRight')lbNav(1);
-    if(e.key==='ArrowLeft')lbNav(-1);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeLightbox(); closeModal(); }
+  if (document.getElementById('lightbox').classList.contains('open')) {
+    if (e.key === 'ArrowRight') lbNav(1);
+    if (e.key === 'ArrowLeft')  lbNav(-1);
   }
 });
-let _tx=0;
-document.getElementById('lightbox').addEventListener('touchstart',e=>{_tx=e.touches[0].clientX;},{passive:true});
-document.getElementById('lightbox').addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-_tx;if(Math.abs(d)>50)lbNav(d<0?1:-1);},{passive:true});
+
+let _tx = 0;
+document.getElementById('lightbox').addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, { passive: true });
+document.getElementById('lightbox').addEventListener('touchend',   e => {
+  const d = e.changedTouches[0].clientX - _tx;
+  if (Math.abs(d) > 50) lbNav(d < 0 ? 1 : -1);
+}, { passive: true });
 </script>
 </body>
 </html>
