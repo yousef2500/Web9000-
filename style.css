@@ -1,0 +1,117 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(#120018, #2a0a3a);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* الخلفية */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("assets/images/background.jpg") center/cover;
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* شاشة القفل */
+#lockScreen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#lockScreen input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  margin: 10px;
+  text-align: center;
+}
+
+#lockScreen button {
+  padding: 10px 20px;
+  background: hotpink;
+  border: none;
+  border-radius: 20px;
+  color: white;
+}
+
+/* التطبيق */
+.hidden {
+  display: none;
+}
+
+/* الشريط العلوي */
+#banner {
+  position: fixed;
+  top: 10px;
+  width: 100%;
+  text-align: center;
+  background: transparent; /* شفاف */
+  color: #ffffff;
+  font-style: italic;
+  transition: opacity 0.6s ease;
+  opacity: 1;
+  z-index: 999;
+}
+
+@keyframes move {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+/* الألبومات */
+.albums {
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding: 20px;
+}
+
+.heart {
+  text-align: center;
+  font-size: 40px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.heart:hover {
+  transform: scale(1.1);
+}
+
+/* اسم الفولدر */
+.heart span {
+  display: block;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* شريط الموسيقى */
+.music-bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+button {
+  background: hotpink;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  color: white;
+}
