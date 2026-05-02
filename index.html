@@ -4,10 +4,6 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>For Khadija ❤️</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#c9748a">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Khadija ❤️">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
   <style>
     :root{--deep:#0d0a14;--rose:#c9748a;--blush:#f2c5d0;--text:#f5eaf0;--glass:rgba(255,255,255,0.06)}
@@ -52,14 +48,11 @@
     .album-card:active{transform:scale(.97)}
     .album-card.loaded{border-color:rgba(201,116,138,.55)}
     .album-icon{font-size:2rem;display:block;margin-bottom:.4rem;animation:float 3.5s ease-in-out infinite}
-    .album-card:nth-child(2) .album-icon{animation-delay:-.8s}
-    .album-card:nth-child(3) .album-icon{animation-delay:-1.6s}
-    .album-card:nth-child(4) .album-icon{animation-delay:-2.4s}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
     .album-label{font-family:'Playfair Display',serif;font-size:1rem;color:var(--blush)}
     .album-count{font-size:.78rem;color:rgba(242,197,208,.5);margin-top:.2rem}
     .card-thumbs{display:flex;gap:3px;justify-content:center;margin-top:.55rem;height:34px;overflow:hidden;border-radius:8px}
-    .card-thumb{width:34px;height:34px;object-fit:cover;border-radius:5px;flex-shrink:0}
+    .card-thumb{width:34px;height:34px;object-fit:cover;border-radius:5px;flex-shrink:0;background:rgba(201,116,138,.1)}
 
     .music-bar{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:1rem;background:rgba(13,10,20,.82);border:1px solid rgba(201,116,138,.25);border-radius:50px;padding:.6rem 1.6rem;backdrop-filter:blur(18px);box-shadow:0 4px 30px rgba(0,0,0,.5)}
     .mbtn{background:none;border:none;font-size:1.3rem;cursor:pointer;color:var(--blush);padding:.3rem .4rem;border-radius:50%;transition:color .2s,transform .2s,background .2s}
@@ -81,70 +74,74 @@
     .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.7rem}
     .photo-item{aspect-ratio:1;border-radius:14px;overflow:hidden;cursor:pointer;border:1px solid rgba(201,116,138,.18);transition:transform .25s,border-color .25s,box-shadow .25s;position:relative;background:rgba(201,116,138,.06)}
     .photo-item:hover{transform:scale(1.04);border-color:var(--rose);box-shadow:0 6px 22px rgba(201,116,138,.3)}
-    .photo-item img,.photo-item video{width:100%;height:100%;object-fit:cover;display:block}
-    .play-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:#fff;background:rgba(0,0,0,.3);pointer-events:none}
+    .photo-item img{width:100%;height:100%;object-fit:cover;display:block}
+    .photo-item .vid-thumb{width:100%;height:100%;object-fit:cover;display:block}
+    .play-badge{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:#fff;background:rgba(0,0,0,.35);pointer-events:none}
     .empty-state{grid-column:1/-1;text-align:center;padding:3rem 1rem;color:rgba(242,197,208,.4)}
     .empty-state .em{font-size:3rem;margin-bottom:1rem}
 
     #lightbox{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.93);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
     #lightbox.open{opacity:1;visibility:visible}
     #lbImg{max-width:92vw;max-height:88vh;border-radius:14px;box-shadow:0 0 60px rgba(201,116,138,.35);display:none}
-    #lbVid{max-width:92vw;max-height:88vh;border-radius:14px;display:none;background:#000}
     #lbClose{position:absolute;top:1rem;right:1.2rem;font-size:1.8rem;color:var(--blush);background:none;border:none;cursor:pointer;z-index:1}
     .lb-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(201,116,138,.2);border:none;color:var(--blush);font-size:2rem;padding:.4rem .85rem;border-radius:50%;cursor:pointer;transition:background .2s;z-index:1}
     .lb-arrow:hover{background:rgba(201,116,138,.45)}
     #lbPrev{left:.8rem} #lbNext{right:.8rem}
     #lbCap{position:absolute;bottom:1.2rem;left:50%;transform:translateX(-50%);font-size:.82rem;color:rgba(242,197,208,.5);background:rgba(0,0,0,.4);padding:.3rem .9rem;border-radius:20px;white-space:nowrap}
+
+    #videoFrame{position:fixed;inset:0;z-index:400;background:rgba(5,3,10,.97);display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+    #videoFrame.open{opacity:1;visibility:visible}
+
+    .vf-header{display:flex;align-items:center;gap:.8rem;padding:1rem 1.4rem;border-bottom:1px solid rgba(201,116,138,.15)}
+    .vf-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;color:var(--blush);flex:1}
+    .vf-count{font-size:.85rem;color:rgba(242,197,208,.4)}
+    .vf-close{background:none;border:none;cursor:pointer;font-size:1.5rem;color:var(--rose);transition:transform .2s}
+    .vf-close:hover{transform:rotate(90deg) scale(1.2)}
+
+    .vf-body{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;gap:1rem}
+
+    #vfVideo{width:100%;max-width:900px;max-height:65vh;border-radius:16px;background:#000;box-shadow:0 0 40px rgba(201,116,138,.2)}
+
+    .progress-bar{width:100%;max-width:900px;display:flex;align-items:center;gap:.6rem}
+    .progress-track{flex:1;height:6px;background:rgba(201,116,138,.2);border-radius:3px;cursor:pointer;position:relative;overflow:hidden}
+    .progress-fill{height:100%;background:linear-gradient(90deg,var(--rose),var(--blush));border-radius:3px;width:0%;transition:width .1s linear;pointer-events:none}
+    .progress-time{font-size:.75rem;color:rgba(242,197,208,.6);min-width:80px;text-align:center;font-family:monospace}
+
+    .vf-controls{display:flex;align-items:center;gap:1.2rem;margin-top:.3rem}
+    .vf-btn{background:rgba(201,116,138,.15);border:1px solid rgba(201,116,138,.3);border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--blush);cursor:pointer;transition:all .2s}
+    .vf-btn:hover{background:rgba(201,116,138,.35);color:#fff;transform:scale(1.1)}
+    .vf-btn.play-btn{width:56px;height:56px;font-size:1.8rem;background:linear-gradient(135deg,var(--rose),#9b4a62);border:none;color:#fff}
+    .vf-btn.play-btn:hover{transform:scale(1.12)}
+    .vf-btn:disabled{opacity:.3;cursor:not-allowed;transform:none!important}
+
+    .vf-info{text-align:center;color:rgba(242,197,208,.5);font-size:.85rem;margin-top:.5rem}
+
+    .offline-badge{position:fixed;top:1rem;right:1rem;z-index:500;background:rgba(201,116,138,.2);border:1px solid var(--rose);border-radius:20px;padding:.3rem .8rem;font-size:.75rem;color:var(--blush);display:none}
+    .offline-badge.show{display:block}
   </style>
 </head>
 <body>
 
 <div id="stars"></div>
+<div class="offline-badge" id="offlineBadge">📦 Offline Mode</div>
 
 <div id="loadingOverlay">
   <div class="spinner"></div>
-  <p>Loading memories…</p>
+  <p id="loadingText">Loading memories…</p>
   <p id="loadingProgress"></p>
 </div>
 
 <div id="lockScreen">
   <div class="lock-icon">💗</div>
   <h2>Enter Password ❤️</h2>
-  <input type="password" id="password" placeholder="••••" autocomplete="off"
-         onkeydown="if(event.key==='Enter')checkPassword()">
+  <input type="password" id="password" placeholder="••••" autocomplete="off" onkeydown="if(event.key==='Enter')checkPassword()">
   <button onclick="checkPassword()">Open Heart</button>
   <p id="errorMsg"></p>
 </div>
 
 <div id="app">
   <div id="banner"></div>
-
-  <div class="albums">
-    <div class="album-card" id="card-first_date" onclick="openAlbum('first_date')">
-      <span class="album-icon">🌹</span>
-      <div class="album-label">First Date</div>
-      <div class="album-count" id="count-first_date">…</div>
-      <div class="card-thumbs" id="thumbs-first_date"></div>
-    </div>
-    <div class="album-card" id="card-second_date" onclick="openAlbum('second_date')">
-      <span class="album-icon">🌙</span>
-      <div class="album-label">Second Date</div>
-      <div class="album-count" id="count-second_date">…</div>
-      <div class="card-thumbs" id="thumbs-second_date"></div>
-    </div>
-    <div class="album-card" id="card-third_date" onclick="openAlbum('third_date')">
-      <span class="album-icon">✨</span>
-      <div class="album-label">Third Date</div>
-      <div class="album-count" id="count-third_date">…</div>
-      <div class="card-thumbs" id="thumbs-third_date"></div>
-    </div>
-    <div class="album-card" id="card-Memories" onclick="openAlbum('Memories')">
-      <span class="album-icon">💫</span>
-      <div class="album-label">Memories</div>
-      <div class="album-count" id="count-Memories">…</div>
-      <div class="card-thumbs" id="thumbs-Memories"></div>
-    </div>
-  </div>
+  <div class="albums" id="albumsContainer"></div>
 
   <div class="music-bar">
     <button class="mbtn" onclick="prevSong()">⏮</button>
@@ -169,34 +166,47 @@
   <button id="lbClose" onclick="closeLightbox()">✕</button>
   <button class="lb-arrow" id="lbPrev" onclick="lbNav(-1)">‹</button>
   <img id="lbImg" src="" alt="">
-  <video id="lbVid" controls playsinline></video>
   <button class="lb-arrow" id="lbNext" onclick="lbNav(1)">›</button>
   <div id="lbCap"></div>
+</div>
+
+<div id="videoFrame">
+  <div class="vf-header">
+    <span class="vf-title" id="vfTitle"></span>
+    <span class="vf-count" id="vfCount"></span>
+    <button class="vf-close" onclick="closeVideoFrame()">✕</button>
+  </div>
+  <div class="vf-body">
+    <video id="vfVideo" playsinline preload="metadata"></video>
+
+    <div class="progress-bar">
+      <span class="progress-time" id="vfCurrent">0:00</span>
+      <div class="progress-track" id="vfTrack" onclick="seekVideo(event)">
+        <div class="progress-fill" id="vfFill"></div>
+      </div>
+      <span class="progress-time" id="vfDuration">0:00</span>
+    </div>
+
+    <div class="vf-controls">
+      <button class="vf-btn" id="vfPrevBtn" onclick="vfPrev()">⏮</button>
+      <button class="vf-btn play-btn" id="vfPlayBtn" onclick="vfTogglePlay()">▶</button>
+      <button class="vf-btn" id="vfNextBtn" onclick="vfNext()">⏭</button>
+    </div>
+
+    <div class="vf-info" id="vfInfo"></div>
+  </div>
 </div>
 
 <script>
 /* ══════════════════════════════════════════
    ⚙️  CONFIG
 ══════════════════════════════════════════ */
-const GITHUB_TOKEN  = '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';
+const GITHUB_TOKEN  = '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';
 const GITHUB_REPO   = 'yousef2500/Web9000-';
 const GITHUB_BRANCH = 'main';
 
-const ALBUM_FOLDERS = {
-  'first_date' : 'assets/images/first_date',
-  'second_date': 'assets/images/second_date',
-  'third_date' : 'assets/images/third_date',
-  'Memories'   : 'assets/images/Memories',
-};
-
-const ALBUM_LABELS = {
-  'first_date' : 'First Date 🌹',
-  'second_date': 'Second Date 🌙',
-  'third_date' : 'Third Date ✨',
-  'Memories'   : 'Memories 💫',
-};
-
-const MUSIC_FOLDER = 'assets/music';
+const MUSIC_FOLDER   = 'assets/music';
+const IMAGES_FOLDER  = 'assets/images';
 
 const MSGS = [
   "Khadija, you are my moon ❤️",
@@ -210,83 +220,270 @@ const MSGS = [
 ];
 
 /* ══════════════════════════════════════════
-   STATE
+   LOCAL STORAGE
 ══════════════════════════════════════════ */
-const albums = {};
-Object.keys(ALBUM_FOLDERS).forEach(k => albums[k] = []);
+const DB_NAME = 'KhadijaDB';
+const DB_VERSION = 1;
+let db = null;
 
-let openKey='', lbIdx=0, curSong=0, audio=null, isMuted=false;
-let songs = []; // { url, title } — direct GitHub URLs, no blob pre-fetch
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+    request.onerror = () => reject(request.error);
+    request.onsuccess = () => resolve(request.result);
+    request.onupgradeneeded = (e) => {
+      const database = e.target.result;
+      if (!database.objectStoreNames.contains('media')) {
+        database.createObjectStore('media');
+      }
+    };
+  });
+}
+
+async function saveToDB(key, data) {
+  if (!db) db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('media', 'readwrite');
+    const store = tx.objectStore('media');
+    const request = store.put(data, key);
+    request.onsuccess = () => resolve();
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function getFromDB(key) {
+  if (!db) db = await openDB();
+  return new Promise((resolve) => {
+    const tx = db.transaction('media', 'readonly');
+    const store = tx.objectStore('media');
+    const request = store.get(key);
+    request.onsuccess = () => resolve(request.result || null);
+    request.onerror = () => resolve(null);
+  });
+}
+
+function saveList(key, data) {
+  try {
+    localStorage.setItem(key, JSON.stringify(data));
+    localStorage.setItem(key + '_time', Date.now());
+  } catch(e) {
+    console.warn('LocalStorage full');
+  }
+}
+
+function getList(key) {
+  try {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : null;
+  } catch(e) {
+    return null;
+  }
+}
 
 /* ══════════════════════════════════════════
-   GITHUB API HELPERS
+   STATE
 ══════════════════════════════════════════ */
+let albums = {};
+let songs = [];
+let albumOrder = [];
+let openKey='', lbIdx=0, curSong=0, audio=null, isMuted=false;
+let vfVideo = null, vfItems = [], vfIndex = 0;
+
 const GH_HEADERS = {
   'Authorization': `token ${GITHUB_TOKEN}`,
   'Accept': 'application/vnd.github.v3+json'
 };
 
+/* ══════════════════════════════════════════
+   SUPER FAST LOAD
+══════════════════════════════════════════ */
+async function loadEverything() {
+  document.getElementById('loadingOverlay').classList.add('show');
+
+  const cachedSongs = getList('songs');
+  const cachedAlbums = getList('albums');
+  const cachedOrder = getList('albumOrder');
+
+  if (cachedSongs && cachedAlbums && cachedOrder) {
+    console.log('✅ Loading from memory...');
+    songs = cachedSongs;
+    albums = cachedAlbums;
+    albumOrder = cachedOrder;
+    
+    buildAlbumCards();
+    document.getElementById('loadingOverlay').classList.remove('show');
+    if (songs.length) initMusic();
+    
+    setTimeout(() => updateFromGitHub(), 100);
+    return;
+  }
+
+  console.log('🌐 Loading from GitHub...');
+  await loadFromGitHub();
+}
+
+async function loadFromGitHub() {
+  document.getElementById('loadingProgress').textContent = 'Reading music...';
+  await loadMusicList();
+
+  document.getElementById('loadingProgress').textContent = 'Reading albums...';
+  await loadAlbumsList();
+
+  saveList('songs', songs);
+  saveList('albums', albums);
+  saveList('albumOrder', albumOrder);
+
+  buildAlbumCards();
+  document.getElementById('loadingOverlay').classList.remove('show');
+  if (songs.length) initMusic();
+}
+
+async function updateFromGitHub() {
+  console.log('🔄 Checking for updates...');
+  const newSongs = await loadMusicList(true);
+  const { newAlbums, newOrder } = await loadAlbumsList(true);
+  
+  if (JSON.stringify(newSongs) !== JSON.stringify(songs) ||
+      JSON.stringify(newOrder) !== JSON.stringify(albumOrder)) {
+    console.log('✨ New content found!');
+    songs = newSongs;
+    albums = newAlbums;
+    albumOrder = newOrder;
+    saveList('songs', songs);
+    saveList('albums', albums);
+    saveList('albumOrder', albumOrder);
+    buildAlbumCards();
+  }
+}
+
+/* ══════════════════════════════════════════
+   LOAD MUSIC
+══════════════════════════════════════════ */
+async function loadMusicList(justCheck = false) {
+  const files = await ghListFolder(MUSIC_FOLDER);
+  const newSongs = files
+    .filter(f => f.type === 'file' && /\.(mp3|ogg|m4a|aac|wav|flac)$/i.test(f.name))
+    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
+    .map(f => ({
+      url: `https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/${MUSIC_FOLDER}/${encodeURIComponent(f.name)}`,
+      title: '♪ ' + f.name.replace(/\.[^.]+$/, '')
+    }));
+  
+  if (!justCheck) songs = newSongs;
+  return newSongs;
+}
+
+/* ══════════════════════════════════════════
+   LOAD ALBUMS - يقرا كل الفولدرات حتى الفاضية
+══════════════════════════════════════════ */
+async function loadAlbumsList(justCheck = false) {
+  const newAlbums = {};
+  const newOrder = [];
+  
+  // ابدأ من assets/images/
+  await scanFolder(IMAGES_FOLDER, '', newAlbums, newOrder);
+  
+  if (!justCheck) {
+    albums = newAlbums;
+    albumOrder = newOrder;
+  }
+  return { newAlbums, newOrder };
+}
+
+async function scanFolder(path, parentName, newAlbums, newOrder) {
+  const items = await ghListFolder(path);
+  
+  // اعمل ألبوم للفولدر ده (حتى لو فاضي)
+  const folderName = parentName || 'Memories';
+  
+  if (!newAlbums[folderName]) {
+    newAlbums[folderName] = [];
+    if (!newOrder.includes(folderName)) newOrder.push(folderName);
+  }
+  
+  // ضيف الملفات للألبوم
+  for (const f of items) {
+    if (f.type === 'file' && /\.(jpe?g|png|webp|gif|mp4|mov|webm|mkv)$/i.test(f.name)) {
+      const isVideo = /\.(mp4|mov|webm|mkv)$/i.test(f.name);
+      newAlbums[folderName].push({
+        type: isVideo ? 'video' : 'image',
+        src: `https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}/${f.path}`,
+        name: f.name
+      });
+    }
+  }
+  
+  // ادخل في كل subfolders (حتى لو فاضية)
+  for (const f of items) {
+    if (f.type === 'dir') {
+      const subName = parentName ? `${parentName} › ${f.name}` : f.name;
+      await scanFolder(f.path, subName, newAlbums, newOrder);
+    }
+  }
+}
+
+/* ══════════════════════════════════════════
+   GITHUB API
+══════════════════════════════════════════ */
 async function ghListFolder(path) {
   const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${path}?ref=${GITHUB_BRANCH}`;
+  
+  const cached = await getFromDB('api_' + path);
+  if (cached && Date.now() - cached.time < 3600000) {
+    return cached.data;
+  }
+
   try {
-    const res = await fetch(url, { headers: GH_HEADERS });
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 5000);
+    
+    const res = await fetch(url, { 
+      headers: GH_HEADERS,
+      signal: controller.signal
+    });
+    
+    clearTimeout(timeout);
+    
     if (!res.ok) return [];
     const data = await res.json();
+    
+    await saveToDB('api_' + path, { data, time: Date.now() });
+    
     return Array.isArray(data) ? data : [];
   } catch(e) {
-    console.warn('ghListFolder failed:', path, e);
+    console.warn('API error:', path, e);
     return [];
   }
 }
 
 /* ══════════════════════════════════════════
-   LOAD MUSIC — قائمة URLs مباشرة، بدون blob
+   BUILD ALBUM CARDS
 ══════════════════════════════════════════ */
-async function loadMusic() {
-  const files = await ghListFolder(MUSIC_FOLDER);
-  songs = files
-    .filter(f => f.type === 'file' && /\.(mp3|ogg|m4a|aac|wav|flac)$/i.test(f.name))
-    .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))
-    .map(f => ({
-      url  : f.download_url,   // ← URL مباشر، مش blob
-      title: '♪ ' + f.name.replace(/\.[^.]+$/, '')
-    }));
-}
+function buildAlbumCards() {
+  const container = document.getElementById('albumsContainer');
+  container.innerHTML = '';
+  const icons = ['🌹', '🌙', '✨', '💫', '🌸', '💎', '🦋', '⭐', '🔥', '💎'];
 
-/* ══════════════════════════════════════════
-   LOAD ALBUMS — URLs مباشرة، بدون blob
-══════════════════════════════════════════ */
-async function loadAllAlbums() {
-  document.getElementById('loadingOverlay').classList.add('show');
+  albumOrder.forEach((folderName, index) => {
+    const items = albums[folderName];
+    const label = folderName.replace(/[_-]/g, ' ').replace(/\//g, ' › ').replace(/\b\w/g, l => l.toUpperCase());
+    const icon = icons[index % icons.length];
 
-  await loadMusic();
+    const card = document.createElement('div');
+    card.className = 'album-card';
+    card.id = 'card-' + folderName.replace(/[^a-z0-9]/gi, '-');
+    card.onclick = () => openAlbum(folderName);
 
-  const keys = Object.keys(ALBUM_FOLDERS);
-  for (const key of keys) {
-    document.getElementById('loadingProgress').textContent = `Loading ${ALBUM_LABELS[key]}…`;
+    card.innerHTML = `
+      <span class="album-icon">${icon}</span>
+      <div class="album-label">${label}</div>
+      <div class="album-count" id="count-${folderName.replace(/[^a-z0-9]/gi, '-')}">…</div>
+      <div class="card-thumbs" id="thumbs-${folderName.replace(/[^a-z0-9]/gi, '-')}"></div>
+    `;
 
-    const files = await ghListFolder(ALBUM_FOLDERS[key]);
-
-    const media = files
-      .filter(f => f.type === 'file' && /\.(jpe?g|png|webp|gif|mp4|mov|webm|mkv)$/i.test(f.name))
-      .sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }));
-
-    /* ✅ استخدام download_url مباشرةً بدون أي blob fetch */
-    media.forEach(f => {
-      const isVideo = /\.(mp4|mov|webm|mkv)$/i.test(f.name);
-      albums[key].push({
-        type: isVideo ? 'video' : 'image',
-        src : f.download_url,   // ← مش blob
-        name: f.name
-      });
-    });
-
-    updateCard(key);
-  }
-
-  document.getElementById('loadingOverlay').classList.remove('show');
-
-  if (songs.length) initMusic();
+    container.appendChild(card);
+    updateCard(folderName);
+  });
 }
 
 /* ══════════════════════════════════════════
@@ -311,7 +508,7 @@ function checkPassword() {
     document.getElementById('lockScreen').classList.add('gone');
     requestAnimationFrame(() => document.getElementById('app').classList.add('visible'));
     startBanner();
-    loadAllAlbums();
+    loadEverything();
   } else {
     document.getElementById('errorMsg').textContent = 'Wrong password 💔';
     setTimeout(() => document.getElementById('errorMsg').textContent = '', 2000);
@@ -331,7 +528,7 @@ function startBanner() {
 }
 
 /* ══════════════════════════════════════════
-   MUSIC — بيشغّل مباشرة من URL
+   MUSIC
 ══════════════════════════════════════════ */
 function initMusic() {
   if (!songs.length) return;
@@ -365,22 +562,25 @@ function toggleMute() {
    UPDATE CARD
 ══════════════════════════════════════════ */
 function updateCard(key) {
-  const items   = albums[key];
-  const countEl = document.getElementById('count-'  + key);
-  const thumbEl = document.getElementById('thumbs-' + key);
-  const card    = document.getElementById('card-'   + key);
+  const items = albums[key];
+  const safeKey = key.replace(/[^a-z0-9]/gi, '-');
+  const countEl = document.getElementById('count-' + safeKey);
+  const thumbEl = document.getElementById('thumbs-' + safeKey);
+  const card = document.getElementById('card-' + safeKey);
+  if (!countEl) return;
 
   const photos = items.filter(i => i.type === 'image').length;
-  const vids   = items.filter(i => i.type === 'video').length;
+  const vids = items.filter(i => i.type === 'video').length;
 
   if (items.length) {
     let txt = '';
     if (photos) txt += photos + ' photo' + (photos > 1 ? 's' : '');
-    if (vids)   txt += (txt ? ' · ' : '') + vids + ' video' + (vids > 1 ? 's' : '');
+    if (vids) txt += (txt ? ' · ' : '') + vids + ' video' + (vids > 1 ? 's' : '');
     countEl.textContent = txt;
     card.classList.add('loaded');
   } else {
-    countEl.textContent = 'empty';
+    countEl.textContent = 'empty 💭';
+    card.style.opacity = '0.7';
   }
 
   thumbEl.innerHTML = '';
@@ -390,7 +590,6 @@ function updateCard(key) {
       img.src = item.src; img.className = 'card-thumb';
       thumbEl.appendChild(img);
     } else {
-      /* thumbnail للفيديو: أول فريم */
       const vid = document.createElement('video');
       vid.src = item.src; vid.className = 'card-thumb';
       vid.muted = true; vid.preload = 'metadata';
@@ -405,13 +604,15 @@ function updateCard(key) {
 function openAlbum(key) {
   openKey = key;
   const items = albums[key];
-  document.getElementById('modalTitle').textContent = ALBUM_LABELS[key];
+  const label = key.replace(/[_-]/g, ' ').replace(/\//g, ' › ').replace(/\b\w/g, l => l.toUpperCase());
+
+  document.getElementById('modalTitle').textContent = label;
   document.getElementById('modalCount').textContent = items.length ? `(${items.length})` : '';
   const grid = document.getElementById('photoGrid');
   grid.innerHTML = '';
 
   if (!items.length) {
-    grid.innerHTML = `<div class="empty-state"><div class="em">📂</div><p>No files found yet</p></div>`;
+    grid.innerHTML = `<div class="empty-state"><div class="em">💭</div><p>This album is empty<br>Add photos or videos to see them here</p></div>`;
   } else {
     items.forEach((item, idx) => {
       const div = document.createElement('div');
@@ -421,21 +622,18 @@ function openAlbum(key) {
         const img = document.createElement('img');
         img.src = item.src; img.alt = item.name; img.loading = 'lazy';
         div.appendChild(img);
+        div.onclick = () => openLightbox(idx);
       } else {
-        /* ✅ فيديو: بيتحمّل عند الطلب فقط */
         const vid = document.createElement('video');
-        vid.src = item.src;
-        vid.muted = true; vid.loop = true; vid.playsInline = true;
-        vid.preload = 'metadata';           // بس metadata، مش full load
-        vid.addEventListener('mouseenter', () => vid.play());
-        vid.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
+        vid.src = item.src; vid.className = 'vid-thumb';
+        vid.muted = true; vid.preload = 'metadata';
         div.appendChild(vid);
-        const pi = document.createElement('div');
-        pi.className = 'play-icon'; pi.textContent = '▶';
-        div.appendChild(pi);
+        const badge = document.createElement('div');
+        badge.className = 'play-badge'; badge.textContent = '▶';
+        div.appendChild(badge);
+        div.onclick = () => openVideoFrame(key, idx);
       }
 
-      div.onclick = () => openLightbox(idx);
       grid.appendChild(div);
     });
   }
@@ -453,60 +651,216 @@ function closeModal() {
    LIGHTBOX
 ══════════════════════════════════════════ */
 function openLightbox(idx) {
-  lbIdx = idx;
+  const allItems = albums[openKey];
+  let actualIdx = 0, imgCount = 0;
+  for (let i = 0; i < allItems.length; i++) {
+    if (allItems[i].type === 'image') {
+      if (imgCount === idx) { actualIdx = i; break; }
+      imgCount++;
+    }
+  }
+  lbIdx = actualIdx;
   showLb();
   document.getElementById('lightbox').classList.add('open');
 }
 
 function showLb() {
   const items = albums[openKey];
-  const item  = items[lbIdx];
-  const img   = document.getElementById('lbImg');
-  const vid   = document.getElementById('lbVid');
-
-  document.getElementById('lbCap').textContent = `${lbIdx + 1} / ${items.length}`;
-
-  if (item.type === 'image') {
-    img.src = item.src; img.style.display = 'block';
-    vid.pause(); vid.src = ''; vid.style.display = 'none';
-  } else {
-    vid.src = item.src; vid.style.display = 'block';
-    vid.load(); vid.play().catch(() => {});
-    img.src = ''; img.style.display = 'none';
+  while (items[lbIdx] && items[lbIdx].type !== 'image') {
+    lbIdx = (lbIdx + 1) % items.length;
   }
+  
+  const item = items[lbIdx];
+  const img = document.getElementById('lbImg');
+  const imageItems = items.filter(i => i.type === 'image');
+  const imgPos = items.slice(0, lbIdx + 1).filter(i => i.type === 'image').length;
 
-  document.getElementById('lbPrev').style.opacity = lbIdx === 0 ? .25 : 1;
-  document.getElementById('lbNext').style.opacity = lbIdx === items.length - 1 ? .25 : 1;
+  img.src = item.src; img.style.display = 'block';
+  document.getElementById('lbCap').textContent = `${imgPos} / ${imageItems.length}`;
+  document.getElementById('lbPrev').style.opacity = findPrevImage(lbIdx) === -1 ? .25 : 1;
+  document.getElementById('lbNext').style.opacity = findNextImage(lbIdx) === -1 ? .25 : 1;
+}
+
+function findNextImage(from) {
+  const items = albums[openKey];
+  for (let i = from + 1; i < items.length; i++) if (items[i].type === 'image') return i;
+  return -1;
+}
+function findPrevImage(from) {
+  const items = albums[openKey];
+  for (let i = from - 1; i >= 0; i--) if (items[i].type === 'image') return i;
+  return -1;
 }
 
 function lbNav(d) {
-  lbIdx = Math.max(0, Math.min(albums[openKey].length - 1, lbIdx + d));
+  if (d > 0) { const next = findNextImage(lbIdx); if (next !== -1) lbIdx = next; }
+  else { const prev = findPrevImage(lbIdx); if (prev !== -1) lbIdx = prev; }
   showLb();
 }
 
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('open');
-  const vid = document.getElementById('lbVid');
-  vid.pause(); vid.src = '';
 }
 
 /* ══════════════════════════════════════════
-   KEYBOARD & SWIPE
+   VIDEO FRAME
+══════════════════════════════════════════ */
+function openVideoFrame(albumKey, itemIndex) {
+  closeModal();
+
+  const allItems = albums[albumKey];
+  vfItems = allItems.filter(i => i.type === 'video');
+  
+  let vidCount = 0;
+  for (let i = 0; i < allItems.length; i++) {
+    if (allItems[i].type === 'video') {
+      if (i === itemIndex) { vfIndex = vidCount; break; }
+      vidCount++;
+    }
+  }
+
+  vfVideo = document.getElementById('vfVideo');
+  
+  vfVideo.oncanplaythrough = () => {
+    vfVideo.play().then(() => {
+      document.getElementById('vfPlayBtn').textContent = '⏸';
+    }).catch(() => {
+      vfVideo.muted = true;
+      vfVideo.play();
+    });
+  };
+  
+  vfVideo.onwaiting = () => {
+    document.getElementById('vfInfo').textContent = 'Loading... ⏳';
+  };
+  
+  vfVideo.onplaying = () => {
+    document.getElementById('vfPlayBtn').textContent = '⏸';
+    document.getElementById('vfInfo').textContent = vfItems[vfIndex].name;
+  };
+  
+  vfVideo.onerror = () => {
+    document.getElementById('vfInfo').textContent = 'Error loading video 😢';
+  };
+  
+  vfVideo.ontimeupdate = updateProgress;
+  vfVideo.onloadedmetadata = () => {
+    document.getElementById('vfDuration').textContent = formatTime(vfVideo.duration);
+  };
+  vfVideo.onended = () => {
+    document.getElementById('vfPlayBtn').textContent = '▶';
+    if (vfIndex < vfItems.length - 1) {
+      setTimeout(() => vfNext(), 1500);
+    }
+  };
+
+  loadVideo(vfIndex);
+
+  const label = albumKey.replace(/[_-]/g, ' ').replace(/\//g, ' › ').replace(/\b\w/g, l => l.toUpperCase());
+  document.getElementById('vfTitle').textContent = label;
+  document.getElementById('videoFrame').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function loadVideo(idx) {
+  vfIndex = Math.max(0, Math.min(idx, vfItems.length - 1));
+  const item = vfItems[vfIndex];
+
+  vfVideo.src = item.src;
+  vfVideo.load();
+
+  document.getElementById('vfCount').textContent = `(${vfIndex + 1} / ${vfItems.length})`;
+  document.getElementById('vfInfo').textContent = item.name;
+  document.getElementById('vfPlayBtn').textContent = '▶';
+  document.getElementById('vfPrevBtn').disabled = vfIndex === 0;
+  document.getElementById('vfNextBtn').disabled = vfIndex === vfItems.length - 1;
+}
+
+function vfTogglePlay() {
+  if (!vfVideo) return;
+  
+  if (vfVideo.paused) {
+    vfVideo.play().then(() => {
+      document.getElementById('vfPlayBtn').textContent = '⏸';
+    }).catch(() => {});
+  } else {
+    vfVideo.pause();
+    document.getElementById('vfPlayBtn').textContent = '▶';
+  }
+}
+
+function vfPrev() {
+  if (vfIndex > 0) {
+    loadVideo(vfIndex - 1);
+    vfVideo.play().catch(() => {});
+  }
+}
+
+function vfNext() {
+  if (vfIndex < vfItems.length - 1) {
+    loadVideo(vfIndex + 1);
+    vfVideo.play().catch(() => {});
+  }
+}
+
+function updateProgress() {
+  if (!vfVideo || !vfVideo.duration) return;
+  const pct = (vfVideo.currentTime / vfVideo.duration) * 100;
+  document.getElementById('vfFill').style.width = pct + '%';
+  document.getElementById('vfCurrent').textContent = formatTime(vfVideo.currentTime);
+}
+
+function seekVideo(e) {
+  if (!vfVideo || !vfVideo.duration) return;
+  const track = document.getElementById('vfTrack');
+  const rect = track.getBoundingClientRect();
+  const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+  vfVideo.currentTime = pct * vfVideo.duration;
+}
+
+function formatTime(s) {
+  if (!s || isNaN(s)) return '0:00';
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60);
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+function closeVideoFrame() {
+  document.getElementById('videoFrame').classList.remove('open');
+  if (vfVideo) {
+    vfVideo.pause();
+    vfVideo.src = '';
+    vfVideo.load();
+  }
+  document.body.style.overflow = '';
+}
+
+/* ══════════════════════════════════════════
+   KEYBOARD
 ══════════════════════════════════════════ */
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeLightbox(); closeModal(); }
+  if (e.key === 'Escape') {
+    closeLightbox();
+    closeModal();
+    closeVideoFrame();
+  }
   if (document.getElementById('lightbox').classList.contains('open')) {
     if (e.key === 'ArrowRight') lbNav(1);
-    if (e.key === 'ArrowLeft')  lbNav(-1);
+    if (e.key === 'ArrowLeft') lbNav(-1);
+  }
+  if (document.getElementById('videoFrame').classList.contains('open')) {
+    if (e.key === ' ') { e.preventDefault(); vfTogglePlay(); }
+    if (e.key === 'ArrowRight') vfNext();
+    if (e.key === 'ArrowLeft') vfPrev();
   }
 });
 
-let _tx = 0;
-document.getElementById('lightbox').addEventListener('touchstart', e => { _tx = e.touches[0].clientX; }, { passive: true });
-document.getElementById('lightbox').addEventListener('touchend',   e => {
-  const d = e.changedTouches[0].clientX - _tx;
-  if (Math.abs(d) > 50) lbNav(d < 0 ? 1 : -1);
-}, { passive: true });
+window.addEventListener('offline', () => {
+  document.getElementById('offlineBadge').classList.add('show');
+});
+window.addEventListener('online', () => {
+  document.getElementById('offlineBadge').classList.remove('show');
+});
 </script>
 </body>
 </html>
